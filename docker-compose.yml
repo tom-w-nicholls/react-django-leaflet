@@ -1,0 +1,56 @@
+version: "3.7"
+services:
+  db:
+    image: mysql:5.7
+    volumes:
+        - db_data:/var/lib/mysql
+    restart: always
+    # Note this creates a mysql server at the internal network address "db:3306"
+    ports:
+        - "3306:3306"
+    environment:
+        MYSQL_ROOT_PASSWORD: my-root-pwd
+        MYSQL_DATABASE: mapping
+        # Note these can be used first time to login via PhPMyAdmin
+        MYSQL_USER: my-user
+        MYSQL_PASSWORD: my-pass
+  phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        restart: always
+        ports:
+            - 3334:80
+        environment:
+            PMA_HOST: db
+  django:
+    build: ./backend
+    volumes:
+      - ./backend:/app/backend
+      - ./docs:/app/docs
+    ports:
+      - "8000:8000"
+    environment:
+      - DJANGO_SETTINGS_MODULE=backend.settings.development
+    stdin_open: true
+    tty: true
+    command: python manage.py runserver 0.0.0.0:8000
+    depends_on:
+        - db
+  react:
+    build: ./frontend
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./frontend:/app
+      # One-way volume to use node_modules from inside image
+      - /app/node_modules
+    ports:
+      - "80:3000"
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING="true"
+    depends_on:
+      - django
+    command: npm start
+volumes:
+  # ensures that the mysql database gets kept between docker-compose sessions
+  db_data:

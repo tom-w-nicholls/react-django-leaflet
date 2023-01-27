@@ -1,0 +1,12 @@
+original penrith map
+__pycache__
+help
+i18n
+scripts
+src
+Makefile
+README.*
+source-from-client
+backups
+.git-old
+.vscode
