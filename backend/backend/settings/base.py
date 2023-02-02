@@ -13,8 +13,8 @@ import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-
+# BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -25,8 +25,11 @@ SECRET_KEY = 'django-insecure-o-g5dg@#5141p4ai5wsv(k2usygkkd!+6xy9p7w3sei&x*02gx
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['http://localhost']
+CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_WHITELIST = (
+       'http://localhost',
+)
 LOGIN_REDIRECT_URL = '/home'
 LOGOUT_REDIRECT_URL = '/accounts/login'
 
@@ -47,10 +50,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'mapping',
+    # Allow cross-site requests
+    'corsheaders',
     # Remove rest_framework and api if not using the API - this is added to test
     'rest_framework',
     # 'api',
 ]
+
+
 
 AUTH_USER_MODEL = 'mapping.AppUser'
 
@@ -62,6 +69,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 ROOT_URLCONF = 'backend.urls'
 
@@ -82,6 +90,8 @@ TEMPLATES = [
         },
     },
 ]
+
+# This is so we can read files from the local file system
 
 
 WSGI_APPLICATION = 'backend.wsgi.application'

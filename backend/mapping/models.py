@@ -1,5 +1,6 @@
 from django.db import models
 from .managers import UserManager
+# from django.contrib.gis.db import models
 
 # Create your models here.
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
@@ -30,3 +31,7 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return f"{self.email}"
+
+class SolarRoof(models.Model):
+    tooltip = models.CharField(max_length = 128)
+    # polygon = models.MultiPolygonField()

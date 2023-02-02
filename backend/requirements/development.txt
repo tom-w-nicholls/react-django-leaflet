@@ -17,3 +17,6 @@ numpy
 pandas
 django-cache-machine
 
+psycopg2-binary
+django-cors-headers
+geojson
