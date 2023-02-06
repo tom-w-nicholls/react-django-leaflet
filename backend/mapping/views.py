@@ -27,6 +27,7 @@ class Map(View):
  
 
         f = open(os.path.join(settings.BASE_DIR, 'penrith-wgs84.geojson'))
+  
 
         # At this point, we could use the Python geojson package to read features into a featureCollection
         # featureCollection = geojson.load(f)
