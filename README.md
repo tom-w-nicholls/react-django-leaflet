@@ -1,9 +1,9 @@
 # react-django-leaflet
 <h1> A Quick Demonstration of a simple Django/React/Leaflet project running in Docker</h1>
 
-This uses Django to serve GeoJson data via a REST API and react-leaflet to display it.
+This demonstration application uses Django to serve GeoJson data via a REST API and react-leaflet to display it.
 
-This can be run within a Docker container which utilises hot reload for development purposes.
+This can be all be run within a Docker container which utilises hot reload for development purposes.
 
 Run locally using the commands:
 
