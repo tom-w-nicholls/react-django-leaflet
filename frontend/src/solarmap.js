@@ -11,19 +11,11 @@ const loadMap = async () => {
     return result.json()
 }
 
-// const onEachPolygon = (polygon, layer) => {
-//   const id = polygon.properties.id;
-//   console.log(id);
-//   layer.bindPopup(id);
+const onEachPolygon = (polygon, layer) => {
+  const power = (parseFloat(polygon.properties.Output_kwh))/1000;
+  layer.bindPopup(String(power) + ' MWh Annual');
 
-//   layer.options.fillOpacity = Math.random(); //0-1 (0.1, 0.2, 0.3)
-//   // const colorIndex = Math.floor(Math.random() * this.colors.length);
-//   // layer.options.fillColor = this.colors[colorIndex]; //0
-
-//   layer.on({
-//     // click: this.changeCountryColor,
-//   });
-// };
+};
 
 // Asynchronous fetching of data, using react-async declarative components for clarity
 // Use https://blog.bitsrc.io/declarative-data-fetching-with-react-async-d4dfc63b0597 as a template
@@ -41,8 +33,7 @@ const SolarMap = () => {
         <MapContainer center={[54.66395, -2.75230]} zoom={16}>
           <TileLayer {...tileLayer} />
           <GeoJSON 
-            data={state.data}  />
-
+            data={state.data} onEachFeature={onEachPolygon} />
         </MapContainer>
         </div>  
       </IfFulfilled>
