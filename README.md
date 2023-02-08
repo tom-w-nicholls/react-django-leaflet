@@ -16,3 +16,5 @@ Then go to http://localhost to view the results
 
 The polygon data that this is based on is from a project completed in conjuction with Cumbria Action for Sustainability
 to locate roof spaces in Penrith, Cumbria, UK that are judged using an algorithm to be most suitable for solar panels (using 3D elevation data).
+
+To view: click on a roof space to view estimated potential solar energy generation per annum
