@@ -1,5 +1,5 @@
 # react-django-leaflet
-Quick Demonstration of a basic Django/React/Leaflet project running in Docker
+<h1> A Quick Demonstration of a basic Django/React/Leaflet project running in Docker</h1>
 
 Run locally using the commands:
 
